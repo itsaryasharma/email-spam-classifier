@@ -7,6 +7,10 @@ A text-classification web application that reads an e-mail (subject and body), p
 
 ---
 
+**Live Demo:** https://email-spam-classifier-jwwj.streamlit.app/
+
+---
+
 ## Problem statement
 
 Unwanted bulk e-mail (spam) wastes time and is a common carrier for scams. A spam filter must decide from
@@ -15,6 +19,7 @@ labelled e-mails, measure it honestly, and present it as a small service that ex
 instead of acting as a black box.
 
 ### Objectives
+
 1. Build a reproducible NLP pipeline (parsing → normalisation → TF-IDF → classifier) on real e-mail corpora.
 2. Compare Multinomial Naive Bayes (the classic baseline) with Logistic Regression using cross-validation.
 3. Evaluate on held-out data with metrics suited to an imbalanced, cost-sensitive problem.
@@ -22,16 +27,16 @@ instead of acting as a black box.
 
 ## Features
 
-| Area | What it does |
-|---|---|
-| **Analyse** | Paste any e-mail or load one of four samples; get a verdict, a spam probability and the decision threshold |
-| **Word highlighting** | Every word coloured by how strongly it pushed towards spam (red) or legitimate (green) |
-| **Score breakdown** | Starting point + spam evidence + legitimate evidence = final score (exact, not approximate) |
-| **Adjustable threshold** | Trade false alarms against missed spam |
-| **Input checks** | Empty input rejected; very long input truncated; very short input flagged as unreliable; warning when no known words are present |
-| **Safety notice** | Clearly states that it does not scan links or attachments, check senders, or guarantee safety |
-| **Model card** | Test metrics, confusion matrix, ROC and precision–recall curves, **threshold explorer**, per-corpus results, hyperparameter search, most indicative terms |
-| **How it works / Dataset** | Pipeline, formulas, limitations, corpus composition and cleaning statistics |
+| Area                       | What it does                                                                                                                                              |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Analyse**                | Paste any e-mail or load one of four samples; get a verdict, a spam probability and the decision threshold                                                |
+| **Word highlighting**      | Every word coloured by how strongly it pushed towards spam (red) or legitimate (green)                                                                    |
+| **Score breakdown**        | Starting point + spam evidence + legitimate evidence = final score (exact, not approximate)                                                               |
+| **Adjustable threshold**   | Trade false alarms against missed spam                                                                                                                    |
+| **Input checks**           | Empty input rejected; very long input truncated; very short input flagged as unreliable; warning when no known words are present                          |
+| **Safety notice**          | Clearly states that it does not scan links or attachments, check senders, or guarantee safety                                                             |
+| **Model card**             | Test metrics, confusion matrix, ROC and precision–recall curves, **threshold explorer**, per-corpus results, hyperparameter search, most indicative terms |
+| **How it works / Dataset** | Pipeline, formulas, limitations, corpus composition and cleaning statistics                                                                               |
 
 ## Technology stack
 
@@ -40,11 +45,11 @@ pandas · Streamlit 1.66 · Plotly · joblib · pytest (including Streamlit `App
 
 ## Datasets
 
-| Corpus | Years | E-mails after cleaning | Spam share |
-|---|---|---|---|
-| [Apache SpamAssassin public corpus](https://spamassassin.apache.org/old/publiccorpus/) | 2002–2005 | 5,922 | 30.6% |
-| [Enron-Spam](https://www2.aueb.gr/users/ion/data/enron-spam/) (Metsis, Androutsopoulos & Paliouras, CEAS 2006) | 1999–2005 | 30,461 | 47.8% |
-| **Combined** | | **36,383** | **45.0%** |
+| Corpus                                                                                                         | Years     | E-mails after cleaning | Spam share |
+| -------------------------------------------------------------------------------------------------------------- | --------- | ---------------------- | ---------- |
+| [Apache SpamAssassin public corpus](https://spamassassin.apache.org/old/publiccorpus/)                         | 2002–2005 | 5,922                  | 30.6%      |
+| [Enron-Spam](https://www2.aueb.gr/users/ion/data/enron-spam/) (Metsis, Androutsopoulos & Paliouras, CEAS 2006) | 1999–2005 | 30,461                 | 47.8%      |
+| **Combined**                                                                                                   |           | **36,383**             | **45.0%**  |
 
 Neither corpus has an open licence (copyright in the messages remains with their senders), so **the data
 is not included in this repository**. `python -m src.data` downloads it (about 25 MB). See
@@ -98,14 +103,14 @@ The app opens at **http://localhost:8501**. Stop it with `Ctrl + C`. Run the tes
 
 ### Common startup problems
 
-| Symptom | Fix |
-|---|---|
-| `Activate.ps1 cannot be loaded because running scripts is disabled` | Run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`, then activate again (affects this window only) |
-| `streamlit` / `python` is not recognised, or `ModuleNotFoundError` | The environment is not active: run the `Activate.ps1` line again; always start the app with `python -m streamlit run app.py` |
-| `ModuleNotFoundError: No module named 'src'` | You are not in the project folder; `cd` into the folder that contains `app.py` |
-| `Port 8501 is already in use` | Another app is running; stop it, or use `python -m streamlit run app.py --server.port 8502` |
-| `WinError 206: The filename or extension is too long` during `pip install` | Create the environment at a short path such as `C:\venvs\spam` (as above) |
-| The browser does not open | Open http://localhost:8501 manually |
+| Symptom                                                                    | Fix                                                                                                                          |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `Activate.ps1 cannot be loaded because running scripts is disabled`        | Run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`, then activate again (affects this window only)             |
+| `streamlit` / `python` is not recognised, or `ModuleNotFoundError`         | The environment is not active: run the `Activate.ps1` line again; always start the app with `python -m streamlit run app.py` |
+| `ModuleNotFoundError: No module named 'src'`                               | You are not in the project folder; `cd` into the folder that contains `app.py`                                               |
+| `Port 8501 is already in use`                                              | Another app is running; stop it, or use `python -m streamlit run app.py --server.port 8502`                                  |
+| `WinError 206: The filename or extension is too long` during `pip install` | Create the environment at a short path such as `C:\venvs\spam` (as above)                                                    |
+| The browser does not open                                                  | Open http://localhost:8501 manually                                                                                          |
 
 ## How to use
 
@@ -119,15 +124,15 @@ The app opens at **http://localhost:8501**. Stop it with `Ctrl + C`. Run the tes
 
 **Selected model:** TF-IDF (unigrams + bigrams, 30,000 terms) + **Logistic Regression (C = 10)**.
 
-| Metric (spam = positive class) | Value |
-|---|---|
-| Accuracy | **98.47%** |
-| Precision | 0.980 |
-| Recall | 0.986 |
-| F1-score | **0.983** |
-| ROC-AUC | 0.9989 |
+| Metric (spam = positive class)     | Value              |
+| ---------------------------------- | ------------------ |
+| Accuracy                           | **98.47%**         |
+| Precision                          | 0.980              |
+| Recall                             | 0.986              |
+| F1-score                           | **0.983**          |
+| ROC-AUC                            | 0.9989             |
 | Legitimate e-mails wrongly flagged | 65 of 4,004 (1.6%) |
-| Spam missed | 46 of 3,273 (1.4%) |
+| Spam missed                        | 46 of 3,273 (1.4%) |
 
 Five-fold CV F1 on the training split: Logistic Regression **0.9842** (best C = 10) vs Multinomial Naive
 Bayes 0.9771 (best α = 0.01). The difference (0.0071) exceeds the pre-declared 0.005 tolerance, so the
@@ -140,10 +145,10 @@ cosine ≥ 0.9). On the remaining e-mails F1 is **0.975**, the fairer figure for
 
 **These scores are for 1999–2005 e-mail** from the same corpora; performance on modern spam was not measured.
 
-| Corpus (test split) | E-mails | F1 | ROC-AUC |
-|---|---|---|---|
-| Enron-Spam | 6,092 | 0.986 | 0.9991 |
-| SpamAssassin | 1,185 | 0.959 | 0.9982 |
+| Corpus (test split) | E-mails | F1    | ROC-AUC |
+| ------------------- | ------- | ----- | ------- |
+| Enron-Spam          | 6,092   | 0.986 | 0.9991  |
+| SpamAssassin        | 1,185   | 0.959 | 0.9982  |
 
 **Threshold trade-off (test set):** at 0.5, 65 false alarms and 46 missed spam; at 0.9, only 5 false alarms
 but 330 missed spam.
@@ -168,6 +173,7 @@ email-spam-classifier/
 ```
 
 ## Limitations
+
 - **Old data (1999–2005).** Modern spam and phishing use different wording, so real-world accuracy will be lower than the test score.
 - **Text only.** It does not open links, inspect attachments or images, or check sender, headers or domains.
 - **Domain bias.** Legitimate training e-mail is mostly technical mailing lists and one energy company's business mail.
@@ -175,10 +181,12 @@ email-spam-classifier/
 - Logistic regression probabilities are reasonable but not formally calibrated.
 
 ## Future improvements
+
 - Add a recent corpus (and recent phishing e-mail) to reduce the age gap.
 - Calibrate probabilities (`CalibratedClassifierCV`) and evaluate with a reliability diagram.
 - Batch scoring of a CSV file; a REST API endpoint.
 
 ## Documentation
+
 [Model card](docs/MODEL_CARD.md) · [Development log](docs/DEVELOPMENT_LOG.md) ·
 [Data sources](docs/DATA_SOURCES.md) · [Testing](docs/TESTING.md)

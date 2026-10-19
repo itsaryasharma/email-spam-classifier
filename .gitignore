@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Datasets: the e-mail corpora are not openly licensed (copyright remains with
+# the original senders), so they are downloaded by `python -m src.data` instead
+# of being committed. See docs/DATA_SOURCES.md.
+data/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Personal study and presentation notes (kept locally, never published)
+private_notes/
+
+
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
